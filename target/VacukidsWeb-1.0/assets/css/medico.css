@@ -1,0 +1,261 @@
+/* =========================================================
+   VacuKids · Panel Médico — Estilos completos
+   Autor: ChatGPT
+   Notas:
+   - Compatible con Bootstrap 5 (no rompe utilidades).
+   - Usa variables para fácil theming.
+   - Incluye estados hover, focus y responsive.
+========================================================= */
+
+/* ---------- Tokens de diseño ---------- */
+:root{
+    --vk-bg: #f5f7fb;
+    --vk-card:#ffffff;
+    --vk-muted:#6b7280;
+    --vk-text:#1f2937;
+    --vk-line:#e8eef5;
+    --vk-primary:#2B6FF9;
+    --vk-success:#10b981;
+    --vk-warning:#f59e0b;
+    --vk-danger:#ef4444;
+    --vk-info:#0ea5e9;
+    --vk-shadow: 0 10px 25px rgba(16,24,40,.08);
+    --vk-radius: 14px;
+}
+
+/* ---------- Reset pequeño ---------- */
+*{
+    box-sizing:border-box
+}
+html,body{
+    height:100%
+}
+body.bg-light{
+    background: var(--vk-bg) !important;
+    color: var(--vk-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Contenedor principal ---------- */
+.container{
+    max-width: 1200px;
+}
+
+/* ---------- Header ---------- */
+.h4{
+    letter-spacing:.2px;
+}
+a.btn-outline-secondary.btn-sm{
+    border-color: #cfd8e3;
+}
+a.btn-outline-secondary.btn-sm:hover{
+    background:#f1f5f9;
+}
+
+/* ---------- KPIs ---------- */
+.card-kpi{
+    background: var(--vk-card);
+    border: 1px solid rgba(0,0,0,.04);
+    border-radius: var(--vk-radius);
+    box-shadow: var(--vk-shadow);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+.card-kpi:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(16,24,40,.12);
+}
+.card-kpi .small{
+    color: var(--vk-muted) !important;
+}
+
+/* Estados de números (opcional) */
+.kpi-good{
+    color: var(--vk-success)
+}
+.kpi-warn{
+    color: var(--vk-warning)
+}
+.kpi-bad{
+    color: var(--vk-danger)
+}
+
+/* ---------- Tarjeta de filtros ---------- */
+.card.mb-3{
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: var(--vk-radius);
+}
+.card .card-body{
+    padding: 18px;
+}
+
+/* Inputs y selects */
+.form-label{
+    font-weight: 600;
+    color:#334155;
+}
+.form-control,
+.form-select{
+    border:1px solid #d7e0ea;
+    border-radius: 10px;
+}
+.form-control:focus,
+.form-select:focus{
+    border-color: var(--vk-primary);
+    box-shadow: 0 0 0 4px rgba(43,111,249,.12);
+}
+
+/* Botones */
+.btn-primary{
+    background: var(--vk-primary);
+    border-color: var(--vk-primary);
+}
+.btn-primary:hover{
+    filter: brightness(.95);
+}
+.btn-outline-secondary{
+    border-color:#d7e0ea;
+    color:#374151;
+}
+.btn-outline-secondary:hover{
+    background:#eef2f7;
+}
+
+/* ---------- Tabla principal ---------- */
+.table-responsive{
+    background: var(--vk-card);
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: var(--vk-radius);
+    box-shadow: var(--vk-shadow);
+    overflow: hidden;
+}
+.table{
+    margin: 0;
+}
+.table thead th{
+    background: #f8fafc;
+    color:#334155;
+    font-weight: 700;
+    border-bottom: 1px solid var(--vk-line);
+}
+.table tbody tr{
+    transition: background .12s ease;
+}
+.table tbody tr:hover{
+    background: #f9fbff;
+}
+.table td, .table th{
+    vertical-align: middle;
+    border-top: 1px solid var(--vk-line) !important;
+}
+.table-sm td, .table-sm th{
+    padding: .55rem .75rem;
+}
+
+/* ---------- Badges suaves ---------- */
+.badge-soft{
+    background: #eef2ff;
+    color: #3b82f6;
+    border: 1px solid #dbe4ff;
+    font-weight: 600;
+    padding:.35rem .55rem;
+    border-radius: 999px;
+}
+
+/* Variantes según estado (usa estas clases si mapeas estados en JS) */
+.badge-soft.success{
+    background:#ecfdf5;
+    color:#059669;
+    border-color:#d1fae5
+}
+.badge-soft.warn{
+    background:#fffbeb;
+    color:#b45309;
+    border-color:#fde68a
+}
+.badge-soft.danger{
+    background:#fef2f2;
+    color:#b91c1c;
+    border-color:#fecaca
+}
+.badge-soft.info{
+    background:#eff6ff;
+    color:#2563eb;
+    border-color:#bfdbfe
+}
+
+/* ---------- Paginación ---------- */
+.pagination-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 0;
+}
+#pageInfo{
+    color: var(--vk-muted);
+    font-weight:600;
+}
+#prevBtn,#nextBtn{
+    min-width: 110px;
+}
+
+/* ---------- Modal Detalle ---------- */
+.modal-content{
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,.06);
+    box-shadow: var(--vk-shadow);
+}
+.modal-header{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #ffffff;
+    border-bottom: 1px solid var(--vk-line);
+}
+.modal-body{
+    background: #ffffff;
+}
+
+/* ---------- Utilidades ---------- */
+.shadow-soft{
+    box-shadow: var(--vk-shadow)
+}
+.rounded-2xl{
+    border-radius: 20px
+}
+.text-muted{
+    color: var(--vk-muted) !important
+}
+
+/* Loader mínimo (puedes añadir <span class="vk-spinner"></span>) */
+.vk-spinner{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #e5e7eb;
+    border-top-color: var(--vk-primary);
+    display:inline-block;
+    animation: vkspin 1s linear infinite;
+}
+@keyframes vkspin{
+    to{
+        transform: rotate(360deg)
+    }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 992px){
+    #kpiRow .col-6{
+        width:50%
+    }
+}
+@media (max-width: 576px){
+    .pagination-wrap{
+        flex-direction:column;
+        align-items:stretch
+    }
+    #prevBtn,#nextBtn{
+        width:100%
+    }
+}

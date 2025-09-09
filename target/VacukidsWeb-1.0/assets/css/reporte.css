@@ -1,0 +1,264 @@
+/* =========================================
+   VacuKids · reportes.css (solo estilos)
+   Página: Reportes y Listados
+   - Encaja con Bootstrap 5
+   - Paleta coherente con login/citas
+   - Modo oscuro automático + estilos de impresión
+   ========================================= */
+
+/* ---------------- Tokens ---------------- */
+:root{
+    /* Base */
+    --vk-bg: #f5f8ff;
+    --vk-bg-2: #eef3ff;
+    --vk-card: #ffffff;
+    --vk-text: #1b2430;
+    --vk-muted: #6b7a90;
+
+    /* Marca */
+    --vk-primary: #2E7CF6;
+    --vk-primary-600: #2569d1;
+    --vk-primary-700: #1e56a6;
+    --vk-accent: #FF6BB3;
+
+    /* UI */
+    --vk-line: #e6ecf7;
+    --vk-radius: 14px;
+    --vk-radius-lg: 18px;
+    --vk-shadow: 0 12px 30px rgba(16,24,40,.10);
+    --vk-shadow-sm: 0 6px 18px rgba(16,24,40,.08);
+
+    /* Gradientes sutiles */
+    --vk-grad-1: radial-gradient(900px 420px at -10% -10%, rgba(46,124,246,.12), transparent 60%);
+    --vk-grad-2: radial-gradient(900px 420px at 110% 0%, rgba(255,107,179,.10), transparent 60%);
+}
+
+@media (prefers-color-scheme: dark){
+    :root{
+        --vk-bg: #0f172a;
+        --vk-bg-2: #0b1223;
+        --vk-card: #0b1223;
+        --vk-text: #f8fafc;
+        --vk-muted: #9aa6bd;
+        --vk-line: #1e293b;
+        --vk-shadow: 0 12px 30px rgba(0,0,0,.45);
+        --vk-shadow-sm: 0 6px 18px rgba(0,0,0,.35);
+    }
+}
+
+/* --------------- Lienzo --------------- */
+html, body {
+    height: 100%;
+}
+body{
+    margin:0;
+    color:var(--vk-text);
+    background:
+        var(--vk-grad-1),
+        var(--vk-grad-2),
+        linear-gradient(180deg, var(--vk-bg), var(--vk-bg-2));
+    background-attachment: fixed;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* --------------- Header --------------- */
+header.border-bottom{
+    background: var(--vk-card);
+    border-color: var(--vk-line) !important;
+    box-shadow: var(--vk-shadow-sm);
+}
+header h1 .text-primary{
+    color: var(--vk-primary) !important;
+}
+header .btn{
+    border-radius: 12px;
+}
+
+/* --------------- Contenedor principal --------------- */
+main.container{
+    max-width: 1200px;
+}
+
+/* --------------- Tarjetas --------------- */
+.card{
+    border: 1px solid var(--vk-line) !important;
+    border-radius: var(--vk-radius-lg);
+    box-shadow: var(--vk-shadow-sm);
+}
+.card .form-label{
+    font-weight: 600;
+}
+.card .form-control, .card .form-select{
+    border-radius: 12px;
+    border: 1px solid var(--vk-line);
+    transition: border-color .2s, box-shadow .2s, background-color .2s;
+}
+@media (prefers-color-scheme: dark){
+    .card .form-control, .card .form-select{
+        background:#0e162b;
+        color:var(--vk-text);
+    }
+}
+.card .form-control:focus, .card .form-select:focus{
+    border-color: var(--vk-primary);
+    box-shadow: 0 0 0 3px rgba(46,124,246,.18);
+}
+
+/* --------------- Botones --------------- */
+.btn-primary{
+    --bs-btn-bg: var(--vk-primary);
+    --bs-btn-border-color: var(--vk-primary);
+    --bs-btn-hover-bg: var(--vk-primary-600);
+    --bs-btn-hover-border-color: var(--vk-primary-600);
+    --bs-btn-active-bg: var(--vk-primary-700);
+    --bs-btn-active-border-color: var(--vk-primary-700);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(46,124,246,.25);
+}
+.btn-outline-success{
+    border-radius: 12px;
+}
+.btn-outline-secondary:hover{
+    background: rgba(16,24,40,.05);
+}
+
+/* --------------- Alerts --------------- */
+.alert{
+    border:0;
+    border-radius:14px;
+    box-shadow: var(--vk-shadow-sm);
+}
+.alert-success{
+    background: linear-gradient(0deg, rgba(34,197,94,.1), rgba(34,197,94,.1)), #fff;
+    color:#166534;
+}
+.alert-danger{
+    background: linear-gradient(0deg, rgba(239,68,68,.1), rgba(239,68,68,.1)), #fff;
+    color:#b91c1c;
+}
+@media (prefers-color-scheme: dark){
+    .alert{
+        background: rgba(255,255,255,.03);
+        color: var(--vk-text);
+        border:1px solid var(--vk-line);
+    }
+}
+
+/* --------------- Secciones (títulos + acción) --------------- */
+section .h4{
+    font-weight: 800;
+    letter-spacing: .2px;
+}
+section .btn-outline-success{
+    border-color: #16a34a;
+    color: #16a34a;
+}
+section .btn-outline-success:hover{
+    background: rgba(22,163,74,.08);
+    border-color: #15803d;
+    color:#15803d;
+}
+
+/* --------------- Tablas --------------- */
+.table{
+    margin-bottom: 0;
+}
+.table thead.table-light{
+    background: linear-gradient(0deg, rgba(46,124,246,.06), rgba(46,124,246,.06)), var(--vk-card) !important;
+    border-bottom: 1px solid var(--vk-line);
+}
+.table thead th{
+    text-transform: uppercase;
+    font-size: .82rem;
+    letter-spacing: .03em;
+    color: var(--vk-muted);
+}
+.table tbody tr:hover{
+    background: rgba(46,124,246,.04);
+}
+.table .badge{
+    font-weight: 700;
+    letter-spacing: .2px;
+    border-radius: 999px;
+    padding: .45rem .6rem;
+}
+.text-bg-primary{
+    background-color: var(--vk-primary) !important;
+}
+.text-bg-info{
+    background-color: #06b6d4 !important;
+}
+
+/* --------------- Texto truncado --------------- */
+.text-truncate{
+    max-width: 360px;
+}
+
+/* --------------- Formularios de filtro --------------- */
+form .row.g-3 .form-control[type="date"]::-webkit-calendar-picker-indicator{
+    filter: opacity(.7);
+}
+
+/* --------------- Accesibilidad foco --------------- */
+a:focus, button:focus, .btn:focus, .form-control:focus, .form-select:focus{
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(46,124,246,.25) !important;
+    border-radius: 10px;
+}
+
+/* --------------- Responsivo --------------- */
+@media (max-width: 575.98px){
+    header .container{
+        gap: 12px;
+    }
+    header nav .btn{
+        width: 100%;
+    }
+}
+
+/* --------------- Modo impresión --------------- */
+@media print{
+    :root{
+        --vk-text:#000;
+        --vk-muted:#444;
+        --vk-line:#ddd;
+        --vk-card:#fff;
+    }
+    body{
+        background: #fff !important;
+    }
+    header.border-bottom, .alert, .btn, .card.shadow-sm{
+        box-shadow: none !important;
+    }
+    a[href]:after{
+        content:"";
+    } /* no URLs */
+    .btn, nav, header .btn{
+        display: none !important;
+    } /* oculta botones en impresión */
+    .card{
+        border-color:#bbb !important;
+    }
+    .table thead.table-light{
+        background:#f3f3f3 !important;
+    }
+}
+
+/* --------------- Extras opcionales --------------- */
+/* Sombra suave al pasar por encima de las cards */
+.card:hover{
+    transform: translateY(-1px);
+    transition: transform .18s ease;
+}
+
+/* Iconos en títulos con leve acento */
+.h4 .bi, h1 .bi{
+    filter: drop-shadow(0 3px 8px rgba(46,124,246,.25));
+}
+
+/* Limitar altura de tablas para pantallas pequeñas con scroll suave */
+.table-responsive{
+    border-radius: 12px;
+    border: 1px solid var(--vk-line);
+    box-shadow: var(--vk-shadow-sm);
+}

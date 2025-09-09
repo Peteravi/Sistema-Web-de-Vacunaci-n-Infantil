@@ -1,0 +1,300 @@
+/* =====================================================
+   VacuKids · representante.css (solo estilos)
+   Página: Panel del Representante (agenda & citas)
+   - Compatible con Bootstrap 5
+   - Modo claro/oscuro automático
+   - Accesible y responsive
+   ===================================================== */
+
+/* ---------------- Tokens ---------------- */
+:root{
+    /* Base */
+    --vk-bg: #f6f9ff;
+    --vk-bg-2: #eef3ff;
+    --vk-card: #ffffff;
+    --vk-text: #1e293b;
+    --vk-muted: #6b7280;
+
+    /* Marca */
+    --vk-primary: #2E7CF6;
+    --vk-primary-600: #2569d1;
+    --vk-primary-700: #1e56a6;
+
+    /* Estado */
+    --vk-success: #22c55e;
+    --vk-danger: #ef4444;
+    --vk-warning: #f59e0b;
+    --vk-info: #06b6d4;
+
+    /* UI */
+    --vk-line: #e5eaf3;
+    --vk-radius: 14px;
+    --vk-radius-lg: 18px;
+    --vk-shadow: 0 12px 30px rgba(16,24,40,.10);
+    --vk-shadow-sm: 0 6px 18px rgba(16,24,40,.08);
+
+    /* Gradientes sutiles */
+    --vk-grad-1: radial-gradient(900px 420px at -10% -10%, rgba(46,124,246,.14), transparent 60%);
+    --vk-grad-2: radial-gradient(900px 420px at 110% 0%, rgba(255,107,179,.10), transparent 60%);
+}
+
+@media (prefers-color-scheme: dark){
+    :root{
+        --vk-bg:#0f172a;
+        --vk-bg-2:#0b1223;
+        --vk-card:#0b1223;
+        --vk-text:#f8fafc;
+        --vk-muted:#9aa6bd;
+        --vk-line:#1e293b;
+        --vk-shadow: 0 12px 30px rgba(0,0,0,.45);
+        --vk-shadow-sm: 0 6px 18px rgba(0,0,0,.35);
+    }
+}
+
+/* ---------------- Lienzo ---------------- */
+html, body {
+    height: 100%;
+}
+body{
+    margin:0;
+    color:var(--vk-text);
+    background:
+        var(--vk-grad-1),
+        var(--vk-grad-2),
+        linear-gradient(180deg, var(--vk-bg), var(--vk-bg-2));
+    background-attachment: fixed;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+
+/* ---------------- Header ---------------- */
+.page-header{
+    background: var(--vk-card);
+    border: 1px solid var(--vk-line);
+    border-radius: var(--vk-radius-lg);
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--vk-shadow-sm);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+}
+.page-header .muted{
+    color: var(--vk-muted);
+}
+.page-header .btn{
+    border-radius: 10px;
+}
+
+/* ---------------- Cards (card-vk) ---------------- */
+.card-vk{
+    border: 1px solid var(--vk-line);
+    border-radius: var(--vk-radius-lg);
+    background: var(--vk-card);
+    box-shadow: var(--vk-shadow-sm);
+    overflow: hidden;
+}
+.card-vk .card-header{
+    background: linear-gradient(0deg, rgba(46,124,246,.06), rgba(46,124,246,.06)), var(--vk-card);
+    border-bottom: 1px solid var(--vk-line);
+}
+.card-vk .card-body{
+    padding: 16px 16px 18px;
+}
+
+.form-label{
+    font-weight: 600;
+}
+.form-control, .form-select{
+    border-radius: 12px;
+    border:1px solid var(--vk-line);
+    transition: border-color .2s, box-shadow .2s, background-color .2s;
+}
+@media (prefers-color-scheme: dark){
+    .form-control, .form-select{
+        background:#0e162b;
+        color:var(--vk-text);
+    }
+}
+.form-control:focus, .form-select:focus{
+    border-color: var(--vk-primary);
+    box-shadow: 0 0 0 3px rgba(46,124,246,.18);
+}
+
+/* ---------------- Botón primario ---------------- */
+.btn-primary{
+    --bs-btn-bg: var(--vk-primary);
+    --bs-btn-border-color: var(--vk-primary);
+    --bs-btn-hover-bg: var(--vk-primary-600);
+    --bs-btn-hover-border-color: var(--vk-primary-600);
+    --bs-btn-active-bg: var(--vk-primary-700);
+    --bs-btn-active-border-color: var(--vk-primary-700);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(46,124,246,.25);
+}
+
+/* ---------------- Slots de horarios ---------------- */
+.slot-btn{
+    appearance: none;
+    border: 1px solid var(--vk-line);
+    background: #fff;
+    color: var(--vk-text);
+    padding: .45rem .7rem;
+    border-radius: 999px;
+    font-weight: 600;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(16,24,40,.06);
+    transition: background .15s ease, border-color .15s ease, transform .05s ease;
+    cursor: pointer;
+}
+@media (prefers-color-scheme: dark){
+    .slot-btn{
+        background:#0e162b;
+    }
+}
+.slot-btn:hover{
+    border-color: var(--vk-primary);
+}
+.slot-btn:active{
+    transform: translateY(1px);
+}
+.slot-btn.active{
+    background: var(--vk-primary);
+    border-color: var(--vk-primary);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(46,124,246,.22);
+}
+
+/* Días con disponibilidad */
+#diasWrap{
+    min-height: 22px;
+}
+#diasWrap .muted{
+    color: var(--vk-muted);
+}
+
+/* ---------------- Pills de estado ---------------- */
+.pill{
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: .2px;
+    text-transform: lowercase;
+    box-shadow: 0 2px 8px rgba(16,24,40,.06);
+}
+.pill-conf{
+    background: var(--vk-primary);
+    color:#fff;
+}
+.pill-pend{
+    background: #94a3b8;
+    color:#0b1223;
+}
+.pill-canc{
+    background: var(--vk-danger);
+    color:#fff;
+}
+
+/* ---------------- Tabla “Mis citas” ---------------- */
+.table{
+    margin: 0;
+}
+.table thead{
+    background: linear-gradient(0deg, rgba(46,124,246,.06), rgba(46,124,246,.06)), var(--vk-card);
+    border-bottom: 1px solid var(--vk-line);
+}
+.table thead th{
+    text-transform: uppercase;
+    font-size: .82rem;
+    letter-spacing: .03em;
+    color: var(--vk-muted);
+}
+.table tbody tr:hover{
+    background: rgba(46,124,246,.04);
+}
+.table .btn-group .btn{
+    border-radius: 8px;
+}
+.btn-outline-primary{
+    border-color: var(--vk-primary);
+    color: var(--vk-primary);
+}
+.btn-outline-primary:hover{
+    background: rgba(46,124,246,.08);
+    color: var(--vk-primary-600);
+}
+.btn-outline-danger:hover{
+    background: rgba(239,68,68,.08);
+}
+
+/* ---------------- Muted helper ---------------- */
+.muted{
+    color: var(--vk-muted) !important;
+}
+
+/* ---------------- Modales Bootstrap ---------------- */
+.modal-content{
+    border: 1px solid var(--vk-line);
+    border-radius: var(--vk-radius-lg);
+    box-shadow: var(--vk-shadow);
+    background: var(--vk-card);
+}
+.modal-header{
+    border-bottom: 1px solid var(--vk-line);
+}
+.modal-footer{
+    border-top: 1px solid var(--vk-line);
+}
+
+/* ---------------- Accesibilidad (foco) ---------------- */
+a:focus, button:focus, .btn:focus, .form-control:focus, .form-select:focus, .slot-btn:focus{
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(46,124,246,.25) !important;
+}
+
+/* ---------------- Responsivo ---------------- */
+@media (max-width: 575.98px){
+    .page-header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .table thead{
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td{
+        display:block;
+        width:100%;
+    }
+    .table tr{
+        border-top:1px solid var(--vk-line);
+        padding:.5rem .25rem;
+    }
+    .table td{
+        padding:.45rem 0;
+        border:0 !important;
+    }
+    .table td::before{
+        content: attr(data-label);
+        display:block;
+        font-size:.78rem;
+        color:var(--vk-muted);
+        text-transform: uppercase;
+        letter-spacing:.03em;
+        margin-bottom:.15rem;
+    }
+}
+
+/* ---------------- Micro-interacciones ---------------- */
+.card-vk:hover{
+    transform: translateY(-1px);
+    transition: transform .18s ease;
+}
+.btn-link.btn-sm{
+    text-decoration: none;
+}
+.btn-link.btn-sm:hover{
+    text-decoration: underline;
+}

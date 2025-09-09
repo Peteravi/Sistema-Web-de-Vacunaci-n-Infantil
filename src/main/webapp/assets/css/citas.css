@@ -1,0 +1,305 @@
+/* =========================================
+   VacuKids · citas.css (solo estilos)
+   Página: Gestión de Citas
+   - Encaja con Bootstrap 5
+   - Paleta y componentes coherentes con login.css
+   - Soporta modo oscuro automático
+   ========================================= */
+
+/* ---------------- Tokens ---------------- */
+:root{
+    /* Base */
+    --vk-bg: #f5f8ff;
+    --vk-bg-2: #eef3ff;
+    --vk-card: #ffffff;
+    --vk-text: #1b2430;
+    --vk-muted: #6b7a90;
+
+    /* Marca */
+    --vk-primary: #2E7CF6;
+    --vk-primary-600: #2569d1;
+    --vk-primary-700: #1e56a6;
+    --vk-accent: #FF6BB3;
+
+    /* UI */
+    --vk-line: #e6ecf7;
+    --vk-radius: 14px;
+    --vk-radius-lg: 18px;
+    --vk-shadow: 0 12px 30px rgba(16,24,40,.10);
+    --vk-shadow-sm: 0 6px 18px rgba(16,24,40,.08);
+
+    /* Gradientes sutiles */
+    --vk-grad-1: radial-gradient(900px 420px at -10% -10%, rgba(46,124,246,.15), transparent 60%);
+    --vk-grad-2: radial-gradient(900px 420px at 110% 0%, rgba(255,107,179,.12), transparent 60%);
+}
+
+@media (prefers-color-scheme: dark){
+    :root{
+        --vk-bg: #0f172a;
+        --vk-bg-2: #0b1223;
+        --vk-card: #0b1223;
+        --vk-text: #f8fafc;
+        --vk-muted: #9aa6bd;
+        --vk-line: #1e293b;
+        --vk-shadow: 0 12px 30px rgba(0,0,0,.45);
+        --vk-shadow-sm: 0 6px 18px rgba(0,0,0,.35);
+    }
+}
+
+/* --------------- Lienzo --------------- */
+html, body {
+    height: 100%;
+}
+body{
+    margin:0;
+    color:var(--vk-text);
+    background:
+        var(--vk-grad-1),
+        var(--vk-grad-2),
+        linear-gradient(180deg, var(--vk-bg), var(--vk-bg-2));
+    background-attachment: fixed;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* --------------- Page header --------------- */
+.page-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--vk-card);
+    border: 1px solid var(--vk-line);
+    border-radius: var(--vk-radius-lg);
+    box-shadow: var(--vk-shadow-sm);
+    margin-bottom: 16px;
+}
+.page-header .text-muted{
+    color: var(--vk-muted) !important;
+}
+.page-header .btn{
+    border-radius: 12px;
+}
+.page-header .btn-primary{
+    --bs-btn-bg: var(--vk-primary);
+    --bs-btn-border-color: var(--vk-primary);
+    --bs-btn-hover-bg: var(--vk-primary-600);
+    --bs-btn-hover-border-color: var(--vk-primary-600);
+    --bs-btn-active-bg: var(--vk-primary-700);
+    --bs-btn-active-border-color: var(--vk-primary-700);
+    box-shadow: 0 6px 18px rgba(46,124,246,.25);
+}
+
+/* --------------- Tarjetas de sección --------------- */
+.page-card{
+    background: var(--vk-card);
+    border: 1px solid var(--vk-line);
+    border-radius: var(--vk-radius-lg);
+    box-shadow: var(--vk-shadow-sm);
+    padding: 14px;
+}
+@media (min-width: 576px){
+    .page-card{
+        padding: 18px;
+    }
+}
+
+/* --------------- Filtros --------------- */
+.filters .form-control,
+.filters .form-select{
+    border-radius: 12px;
+    border: 1px solid var(--vk-line);
+    transition: border-color .2s, box-shadow .2s, background-color .2s;
+}
+@media (prefers-color-scheme: dark){
+    .filters .form-control,
+    .filters .form-select{
+        background: #0e162b;
+        color: var(--vk-text);
+    }
+}
+.filters .form-control:focus,
+.filters .form-select:focus{
+    border-color: var(--vk-primary);
+    box-shadow: 0 0 0 3px rgba(46,124,246,.18);
+}
+.filters .btn{
+    border-radius: 12px;
+}
+
+/* --------------- Tabla --------------- */
+.table{
+    --vk-row-hover: rgba(46,124,246,.06);
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0 6px; /* filas con “chips” */
+}
+.table thead th{
+    font-size: .85rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--vk-muted);
+    border-bottom: 1px solid var(--vk-line) !important;
+    background: transparent;
+}
+.table tbody tr{
+    background: var(--vk-card);
+    outline: 1px solid var(--vk-line);
+    border-radius: 12px;
+}
+.table tbody tr:hover{
+    outline-color: rgba(46,124,246,.35);
+    box-shadow: 0 8px 20px rgba(46,124,246,.10);
+}
+.table tbody td{
+    vertical-align: middle;
+    padding: .55rem .75rem;
+}
+.table tbody tr > td:first-child{
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+.table tbody tr > td:last-child{
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* --------------- Badges de estado --------------- */
+.badge.rounded-pill{
+    padding: .45rem .7rem;
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+.text-bg-secondary{
+    background-color: #94a3b8 !important;
+}
+.text-bg-primary{
+    background-color: var(--vk-primary) !important;
+}
+.text-bg-success{
+    background-color: #22c55e !important;
+}
+.text-bg-danger{
+    background-color: #ef4444 !important;
+}
+
+/* --------------- Acciones --------------- */
+.btn-group .btn{
+    border-radius: 10px !important;
+}
+.btn-outline-secondary:hover{
+    background: rgba(16,24,40,.05);
+}
+.btn-outline-primary{
+    border-color: var(--vk-primary);
+    color: var(--vk-primary);
+}
+.btn-outline-primary:hover{
+    background: rgba(46,124,246,.08);
+    border-color: var(--vk-primary-600);
+    color: var(--vk-primary-600);
+}
+
+/* --------------- Paginación --------------- */
+.pagination{
+    gap: .35rem;
+    justify-content: center;
+    padding-top: .4rem;
+}
+.page-item .page-link{
+    border-radius: 10px !important;
+    border: 1px solid var(--vk-line);
+    color: var(--vk-text);
+    background: var(--vk-card);
+    box-shadow: 0 2px 8px rgba(16,24,40,.06);
+}
+.page-item .page-link:hover{
+    border-color: var(--vk-primary);
+}
+.page-item.active .page-link{
+    background: var(--vk-primary);
+    border-color: var(--vk-primary);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(46,124,246,.25);
+}
+
+/* --------------- Modal --------------- */
+.modal-content{
+    border: 1px solid var(--vk-line);
+    border-radius: 18px;
+    box-shadow: var(--vk-shadow);
+}
+.modal-header{
+    border: none;
+    padding-bottom: 0;
+}
+.modal-footer{
+    border: none;
+}
+#frmCita .form-label{
+    font-weight: 600;
+}
+#frmCita .form-control, #frmCita .form-select{
+    border-radius: 12px;
+    border: 1px solid var(--vk-line);
+}
+#frmCita .form-control:focus, #frmCita .form-select:focus{
+    border-color: var(--vk-primary);
+    box-shadow: 0 0 0 3px rgba(46,124,246,.18);
+}
+.form-hint{
+    font-size: .85rem;
+    color: var(--vk-muted);
+}
+
+/* --------------- Accesibilidad foco --------------- */
+a:focus, button:focus, .btn:focus, .page-link:focus, .form-control:focus, .form-select:focus{
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(46,124,246,.25) !important;
+}
+
+/* --------------- Responsivo --------------- */
+@media (max-width: 575.98px){
+    .page-header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .page-header > .d-flex{
+        width: 100%;
+    }
+    .page-header .btn{
+        width: 100%;
+    }
+    .filters .col-12, .filters .col-6, .filters .col-md-1, .filters .col-md-2, .filters .col-md-3{
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .table thead{
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td{
+        display: block;
+        width: 100%;
+    }
+    .table tbody tr{
+        margin-bottom: 10px;
+    }
+    .table td{
+        padding: .5rem .75rem;
+        border: 0 !important;
+    }
+    .table td::before{
+        content: attr(data-label);
+        display: block;
+        font-size: .8rem;
+        color: var(--vk-muted);
+        margin-bottom: .15rem;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+    }
+}
+
+/* --------------- Helpers opcionales --------------- */
+/* Si quieres etiquetas de tabla responsiva sin cambiar el HTML,
+   puedes agregar los data-label desde JS al renderizar filas. Ejemplo:
+   td.setAttribute('data-label', 'Paciente') */

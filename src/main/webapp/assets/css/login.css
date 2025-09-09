@@ -1,0 +1,297 @@
+/* ==============================
+   VacuKids · login.css
+   Autor: Tú :)
+   Notas:
+   - Diseñado para trabajar SOBRE Bootstrap 5.
+   - Paleta fresca, legible y accesible.
+   - Incluye modos claro/oscuro automáticos.
+   ============================== */
+
+/* --------- Tokens --------- */
+:root{
+    /* Colores base */
+    --vk-bg: #f3f7ff;
+    --vk-bg-2: #eaf1ff;
+    --vk-card: #ffffff;
+    --vk-text: #1b2430;
+    --vk-muted: #6b7a90;
+
+    /* Marca */
+    --vk-primary: #2E7CF6;
+    --vk-primary-600: #2569d1;
+    --vk-primary-700: #1e56a6;
+    --vk-accent: #FF6BB3;
+
+    /* Estados */
+    --vk-success: #22c55e;
+    --vk-danger: #ef4444;
+    --vk-warning: #f59e0b;
+    --vk-info: #06b6d4;
+
+    /* Bordes y sombras */
+    --vk-line: #e6ecf7;
+    --vk-radius: 16px;
+    --vk-radius-lg: 20px;
+    --vk-shadow: 0 12px 30px rgba(16, 24, 40, .10);
+    --vk-shadow-sm: 0 6px 18px rgba(16, 24, 40, .08);
+
+    /* Gradientes */
+    --vk-grad-1: radial-gradient(1200px 600px at 20% -20%, rgba(46,124,246,.20), transparent 60%);
+    --vk-grad-2: radial-gradient(1000px 500px at 120% 10%, rgba(255,107,179,.14), transparent 60%);
+    --vk-grad-3: linear-gradient(180deg, rgba(255,255,255,.00), rgba(255,255,255,.30));
+}
+
+/* Oscuro automático (si el SO lo usa) */
+@media (prefers-color-scheme: dark) {
+    :root{
+        --vk-bg: #0f172a;
+        --vk-bg-2: #0b1223;
+        --vk-card: #0b1223;
+        --vk-text: #f8fafc;
+        --vk-muted: #9aa6bd;
+        --vk-line: #1e293b;
+        --vk-shadow: 0 12px 30px rgba(0,0,0,.45);
+        --vk-shadow-sm: 0 6px 18px rgba(0,0,0,.35);
+        --vk-grad-1: radial-gradient(1200px 600px at 20% -20%, rgba(46,124,246,.25), transparent 60%);
+        --vk-grad-2: radial-gradient(1000px 500px at 120% 10%, rgba(255,107,179,.20), transparent 60%);
+        --vk-grad-3: linear-gradient(180deg, rgba(255,255,255,.00), rgba(255,255,255,.03));
+    }
+}
+
+/* --------- Reset sutil --------- */
+*{
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+}
+body{
+    margin:0;
+    color:var(--vk-text);
+    background:
+        var(--vk-grad-1),
+        var(--vk-grad-2),
+        linear-gradient(180deg, var(--vk-bg), var(--vk-bg-2));
+    /* Texturas suaves */
+    background-attachment: fixed;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* --------- Contenedor principal --------- */
+.container{
+    max-width: 1100px;
+}
+
+/* --------- Branding / encabezado --------- */
+.text-center img[alt="VacuKids"]{
+    filter: drop-shadow(0 6px 14px rgba(46,124,246,.25));
+    transition: transform .25s ease, filter .25s ease;
+}
+.text-center img[alt="VacuKids"]:hover{
+    transform: scale(1.03) rotate(-1.2deg);
+    filter: drop-shadow(0 10px 24px rgba(46,124,246,.28));
+}
+.text-center h1{
+    font-weight: 800;
+    letter-spacing: .2px;
+}
+.text-center p{
+    color: var(--vk-muted);
+}
+
+/* --------- Card de login --------- */
+.card{
+    border: 0;
+    border-radius: var(--vk-radius-lg);
+    background:
+        var(--vk-grad-3),
+        var(--vk-card);
+    box-shadow: var(--vk-shadow);
+    backdrop-filter: saturate(120%) blur(6px);
+}
+.card-body{
+    padding: 26px 24px;
+}
+@media (min-width: 576px){
+    .card-body{
+        padding: 32px 28px;
+    }
+}
+
+/* --------- Inputs y labels --------- */
+.form-label{
+    font-weight: 600;
+    color: var(--vk-text);
+}
+.form-control{
+    border-radius: 12px;
+    border: 1px solid var(--vk-line);
+    background-color: #fff;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+@media (prefers-color-scheme: dark){
+    .form-control{
+        background-color: #0e162b;
+        color: var(--vk-text);
+    }
+}
+.form-control:focus{
+    border-color: var(--vk-primary);
+    box-shadow: 0 0 0 3px rgba(46,124,246,.18);
+}
+
+/* Input group (ojo de password) */
+.input-group .btn{
+    border-color: var(--vk-line);
+}
+.input-group .btn:hover{
+    background: rgba(46,124,246,.06);
+}
+
+/* --------- Ayudas de texto --------- */
+.form-text{
+    color: var(--vk-muted);
+}
+
+/* --------- Botón primario --------- */
+.btn-primary{
+    --bs-btn-bg: var(--vk-primary);
+    --bs-btn-border-color: var(--vk-primary);
+    --bs-btn-hover-bg: var(--vk-primary-600);
+    --bs-btn-hover-border-color: var(--vk-primary-600);
+    --bs-btn-active-bg: var(--vk-primary-700);
+    --bs-btn-active-border-color: var(--vk-primary-700);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 700;
+    letter-spacing: .15px;
+    box-shadow: 0 6px 18px rgba(46,124,246,.25);
+    transition: transform .06s ease, box-shadow .2s ease;
+}
+.btn-primary:active{
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px rgba(46,124,246,.28);
+}
+
+/* --------- Enlaces bajo el botón --------- */
+.d-flex a{
+    color: var(--vk-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+.d-flex a:hover{
+    text-decoration: underline;
+}
+
+/* --------- Alerts (mensaje del backend) --------- */
+.alert{
+    border: 0;
+    border-radius: 14px;
+    box-shadow: var(--vk-shadow-sm);
+}
+.alert-danger{
+    background: linear-gradient(0deg, rgba(239,68,68,.1), rgba(239,68,68,.1)), #fff;
+    color:#b91c1c;
+}
+.alert-success{
+    background: linear-gradient(0deg, rgba(34,197,94,.1), rgba(34,197,94,.1)), #fff;
+    color:#166534;
+}
+.alert-info{
+    background: linear-gradient(0deg, rgba(6,182,212,.1), rgba(6,182,212,.1)), #fff;
+    color:#0f766e;
+}
+
+@media (prefers-color-scheme: dark){
+    .alert{
+        background: rgba(255,255,255,.03);
+        color: var(--vk-text);
+        border: 1px solid var(--vk-line);
+    }
+    .alert-danger{
+        color:#fecaca;
+        border-color: rgba(239,68,68,.35);
+    }
+    .alert-success{
+        color:#bbf7d0;
+        border-color: rgba(34,197,94,.35);
+    }
+    .alert-info{
+        color:#a5f3fc;
+        border-color: rgba(6,182,212,.35);
+    }
+}
+
+/* --------- Debug <details> --------- */
+details{
+    background: rgba(0,0,0,.03);
+    border: 1px dashed var(--vk-line);
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+@media (prefers-color-scheme: dark){
+    details{
+        background: rgba(255,255,255,.03);
+    }
+}
+details summary{
+    cursor: pointer;
+    font-weight: 600;
+}
+details pre{
+    border-radius: 10px;
+    border: 1px solid var(--vk-line);
+}
+
+/* --------- Modales (registro / cambio / reset) --------- */
+.modal-content{
+    border: 0;
+    border-radius: 18px;
+    box-shadow: var(--vk-shadow);
+}
+.modal-header{
+    border: 0;
+    padding-bottom: 0;
+}
+.modal-title{
+    font-weight: 800;
+}
+.modal-body{
+    padding-top: 10px;
+}
+.modal-footer{
+    border: 0;
+}
+
+/* --------- Foco accesible también en botones link --------- */
+a:focus, button:focus, .btn:focus{
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(46,124,246,.25) !important;
+    border-radius: 10px;
+}
+
+/* --------- Layout responsivo --------- */
+@media (max-width: 575.98px){
+    .text-center img[alt="VacuKids"]{
+        width: 96px !important;
+        height: 96px !important;
+    }
+    .card{
+        border-radius: 14px;
+    }
+    .btn-primary{
+        padding: 10px 12px;
+    }
+}
+
+/* --------- Pie --------- */
+.text-center.text-muted{
+    color: var(--vk-muted) !important;
+    font-size: .95rem;
+}
+
+/* --------- Toques sutiles --------- */
+.card:hover{
+    transform: translateY(-1px);
+    transition: transform .18s ease;
+}

@@ -1,0 +1,461 @@
+/* ==========================================================================
+   VacuKids · Esquemas de Vacunación (esquemas_view.jsp)
+   Requiere Bootstrap 5.x
+   ========================================================================== */
+
+:root{
+    /* Paleta base */
+    --brand:#2B6FF9;           /* azul principal */
+    --brand-600:#1F5BE0;
+    --brand-700:#1849B6;
+    --brand-50:#F1F6FF;
+
+    --ok:#16a34a;              /* verde éxito */
+    --warn:#f59e0b;            /* ámbar */
+    --err:#ef4444;             /* rojo */
+    --muted:#6b7280;           /* gris texto secundario */
+
+    --bg:#f5f7fb;              /* fondo página */
+    --card:#ffffff;            /* fondo tarjetas */
+    --text:#1f2937;            /* texto base */
+    --line:#e6eef6;            /* bordes suaves */
+
+    --radius:16px;
+    --shadow:0 10px 24px rgba(15, 23, 42, .10);
+    --shadow-sm:0 6px 16px rgba(15, 23, 42, .08);
+}
+
+/* Fondo y tipografía */
+html,body{
+    min-height:100%
+}
+body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* Contenedor principal de la vista */
+.vk-wrap{
+    max-width:1200px;
+    margin-inline:auto;
+    padding:28px 16px 64px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+/* Encabezado / título + acciones */
+.vk-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+}
+.vk-title{
+    font-size:clamp(20px, 2.6vw, 28px);
+    font-weight:800;
+    letter-spacing:.2px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.vk-title .bi{
+    font-size:1.2em;
+    color:var(--brand)
+}
+.vk-sub{
+    color:var(--muted);
+    font-size:.95rem;
+}
+
+/* Tarjetas / paneles */
+.vk-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.vk-card__header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 16px;
+    background:linear-gradient(0deg, #fff, #fff), var(--brand-50);
+    border-bottom:1px solid var(--line);
+}
+.vk-card__body{
+    padding:16px;
+}
+.vk-card__footer{
+    padding:12px 16px;
+    border-top:1px solid var(--line);
+    background:#fafbfd;
+}
+
+/* Barra de filtros / búsqueda */
+.vk-filters{
+    display:grid;
+    gap:10px;
+    grid-template-columns: 1fr minmax(160px, 260px) minmax(130px, 180px) auto;
+}
+@media (max-width: 900px){
+    .vk-filters{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 540px){
+    .vk-filters{
+        grid-template-columns: 1fr;
+    }
+}
+
+.vk-input, .vk-select{
+    height:44px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#fff;
+    padding-inline:12px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s ease, border-color .2s ease;
+}
+.vk-input:focus, .vk-select:focus{
+    outline:none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(43,111,249,.15);
+}
+
+/* Botones */
+.btn-brand{
+    --bs-btn-color:#fff;
+    --bs-btn-bg:var(--brand);
+    --bs-btn-border-color:var(--brand);
+    --bs-btn-hover-bg:var(--brand-600);
+    --bs-btn-hover-border-color:var(--brand-600);
+    --bs-btn-active-bg:var(--brand-700);
+    --bs-btn-active-border-color:var(--brand-700);
+    border-radius:12px;
+    box-shadow: var(--shadow-sm);
+}
+.btn-ghost{
+    background:#fff;
+    border:1px solid var(--line);
+    color:var(--text);
+    border-radius:12px;
+}
+.btn-ghost:hover{
+    border-color: var(--brand);
+}
+
+/* Iconos siempre en azul institucional */
+.bi{
+    color: var(--brand);
+}
+.text-brand{
+    color: var(--brand) !important;
+}
+
+/* Tabla de resultados */
+.vk-table-wrap{
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:auto; /* scrolling horizontal en móviles */
+}
+.table.vk-table{
+    margin:0;
+    vertical-align:middle;
+    white-space:nowrap;
+}
+.vk-table thead th{
+    position: sticky;
+    top:0;
+    z-index:1;
+    background:#f9fbff;
+    border-bottom:1px solid var(--line) !important;
+    color:#0f172a;
+    font-weight:700;
+}
+.vk-table tbody td{
+    border-top:1px solid var(--line) !important;
+}
+.vk-table tbody tr:hover{
+    background:#f7faff;
+}
+.vk-table .actions{
+    display:flex;
+    gap:6px;
+    align-items:center;
+    justify-content:flex-end;
+}
+.vk-table .badge{
+    font-weight:700;
+    letter-spacing:.3px;
+    padding:.45em .6em;
+    border-radius:999px;
+}
+
+/* Badges de estado comunes */
+.badge-activo{
+    background:rgba(22,163,74,.1);
+    color:var(--ok);
+    border:1px solid rgba(22,163,74,.25);
+}
+.badge-inactivo{
+    background:rgba(239,68,68,.08);
+    color:var(--err);
+    border:1px solid rgba(239,68,68,.22);
+}
+.badge-parcial{
+    background:rgba(245,158,11,.1);
+    color:var(--warn);
+    border:1px solid rgba(245,158,11,.25);
+}
+
+/* Paginación / contador */
+.vk-pager{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+}
+.vk-count{
+    color:var(--muted);
+    font-size:.95rem;
+}
+
+/* Estados vacíos / errores */
+.vk-empty{
+    padding:32px 16px;
+    text-align:center;
+    color:var(--muted);
+}
+.vk-empty .bi{
+    font-size:40px;
+    color:var(--brand);
+}
+.vk-empty p{
+    margin:8px 0 0
+}
+
+/* Modales (crear/editar) */
+.modal-content{
+    border-radius:18px;
+    border:1px solid var(--line);
+    box-shadow: var(--shadow);
+}
+.modal-header{
+    border-bottom:1px solid var(--line);
+    background: #fbfdff;
+}
+.modal-footer{
+    border-top:1px solid var(--line);
+    background:#fafbfd;
+}
+.form-floating>.form-control,
+.form-floating>.form-select{
+    border-radius:12px;
+    border:1px solid var(--line);
+}
+.form-control:focus, .form-select:focus{
+    border-color:var(--brand);
+    box-shadow:0 0 0 3px rgba(43,111,249,.15);
+}
+
+/* Switch pequeño alineado en tablas */
+.form-switch .form-check-input{
+    width:2.6em;
+    height:1.3em;
+}
+.form-switch .form-check-input:checked{
+    background-color:var(--brand);
+    border-color:var(--brand);
+}
+
+/* Toasts (esquina superior derecha) */
+#liveToastContainer, .toast-container{
+    position:fixed;
+    top:16px;
+    right:16px;
+    z-index:1080;
+}
+.toast{
+    border-radius:14px;
+    border:1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+}
+.toast-header{
+    gap:8px;
+}
+
+/* Spinners y loaders */
+.vk-spinner{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    color:var(--muted);
+}
+.vk-spinner .spinner-border{
+    width:1.2rem;
+    height:1.2rem;
+}
+
+/* Chips / filtros activos */
+.vk-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:.92rem;
+    padding:.35rem .6rem;
+    border-radius:999px;
+    background:#f2f6ff;
+    border:1px solid var(--line);
+}
+.vk-chip .bi{
+    font-size:1rem;
+}
+
+/* Links de acción */
+.vk-link{
+    color:var(--brand);
+    text-decoration:none;
+    font-weight:600;
+}
+.vk-link:hover{
+    text-decoration:underline
+}
+
+/* Elevación suave al pasar el mouse */
+.hover-card{
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+.hover-card:hover{
+    transform: translateY(-2px);
+    box-shadow:0 12px 28px rgba(15,23,42,.12);
+}
+
+/* Utilidades */
+.rounded-2xl{
+    border-radius:24px !important;
+}
+.shadow-soft{
+    box-shadow: var(--shadow) !important;
+}
+.bg-brand-50{
+    background:var(--brand-50) !important;
+}
+.border-line{
+    border:1px solid var(--line) !important;
+}
+
+/* Ajustes de inputs pequeños en celdas */
+.table .form-control, .table .form-select{
+    height:38px;
+    padding:.25rem .5rem;
+    border-radius:10px;
+}
+
+/* Tooltips más legibles */
+.tooltip-inner{
+    background:#111827;
+    color:#fff;
+    border-radius:10px;
+    padding:.45rem .6rem;
+}
+.bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before,
+.bs-tooltip-top .tooltip-arrow::before{
+    border-top-color:#111827;
+}
+
+/* Offcanvas filtros (si lo usas en móvil) */
+.offcanvas{
+    border-left:1px solid var(--line);
+    border-top-left-radius:16px;
+    border-bottom-left-radius:16px;
+}
+
+/* Indicadores de requeridos */
+.required::after{
+    content:" *";
+    color:var(--err);
+    font-weight:700;
+}
+
+/* Estados de botones de tabla */
+.btn-icon{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:#fff;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .08s ease;
+}
+.btn-icon:hover{
+    border-color: var(--brand);
+    box-shadow: var(--shadow-sm);
+}
+.btn-icon:active{
+    transform: scale(.96);
+}
+
+/* Columna de acciones siempre al final con ancho mínimo */
+th.actions, td.actions{
+    width:1%;
+    white-space:nowrap;
+}
+
+/* Foco accesible en botones y enlaces */
+a:focus-visible, button:focus-visible, .btn:focus-visible, .btn-icon:focus-visible{
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(43,111,249,.25);
+}
+
+/* Pequeños detalles de “tag” para mostrar condiciones o edades */
+.vk-tag{
+    display:inline-block;
+    font-size:.82rem;
+    font-weight:700;
+    letter-spacing:.2px;
+    padding:.28rem .5rem;
+    border-radius:8px;
+    background:#eef4ff;
+    color:#1e3a8a;
+    border:1px solid #dbe6ff;
+}
+
+/* Encabezado de sección con subrayado suave */
+.vk-section{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:6px 0 10px;
+}
+.vk-section h6{
+    margin:0;
+    font-weight:800;
+    color:#0f172a;
+}
+.vk-underline{
+    height:2px;
+    flex:1;
+    background:linear-gradient(90deg, var(--brand) 0%, rgba(43,111,249,0) 100%);
+    opacity:.25;
+    border-radius:2px;
+}
+
+/* Helper: iconos en azul SIN afectar íconos de estado de Bootstrap */
+.icon-blue{
+    color:var(--brand) !important;
+}
+
+/* ======================================================================
+   Fin de estilos
+   ====================================================================== */

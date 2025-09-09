@@ -1,0 +1,447 @@
+/* =========================================
+   VacuKids · vacunas.css (completo, corregido)
+   - Modales: tamaño responsivo, centrado fijo,
+     body flexible con scroll, bottom-sheet móvil
+   ========================================= */
+
+/* ---------------- Tokens ---------------- */
+:root{
+    --vk-bg:#f5f8ff;
+    --vk-bg-2:#eef3ff;
+    --vk-card:#fff;
+    --vk-text:#1b2430;
+    --vk-muted:#6b7a90;
+    --vk-primary:#2E7CF6;
+    --vk-primary-600:#2569d1;
+    --vk-primary-700:#1e56a6;
+    --vk-accent:#FF6BB3;
+    --vk-success:#22c55e;
+    --vk-danger:#ef4444;
+    --vk-warning:#f59e0b;
+    --vk-info:#06b6d4;
+    --vk-line:#e6ecf7;
+    --vk-radius:14px;
+    --vk-radius-lg:18px;
+    --vk-shadow:0 12px 30px rgba(16,24,40,.10);
+    --vk-shadow-sm:0 6px 18px rgba(16,24,40,.08);
+    --vk-grad-1:radial-gradient(900px 420px at -10% -10%, rgba(46,124,246,.14), transparent 60%);
+    --vk-grad-2:radial-gradient(900px 420px at 110% 0%, rgba(255,107,179,.10), transparent 60%);
+    /* Modales */
+    --vk-modal-bg:color-mix(in oklab, var(--vk-card), transparent 0%);
+    --vk-modal-backdrop:rgba(2,6,23,.45);
+    --vk-modal-header-grad:linear-gradient(180deg, rgba(46,124,246,.10), transparent 80%);
+    --vk-modal-danger-grad:linear-gradient(180deg, rgba(239,68,68,.12), transparent 80%);
+}
+@media (prefers-color-scheme: dark){
+    :root{
+        --vk-bg:#0f172a;
+        --vk-bg-2:#0b1223;
+        --vk-card:#0b1223;
+        --vk-text:#f8fafc;
+        --vk-muted:#9aa6bd;
+        --vk-line:#1e293b;
+        --vk-shadow:0 12px 30px rgba(0,0,0,.45);
+        --vk-shadow-sm:0 6px 18px rgba(0,0,0,.35);
+        --vk-modal-bg:color-mix(in oklab, #101826, transparent 0%);
+        --vk-modal-backdrop:rgba(2,6,23,.60);
+    }
+}
+
+/* ---------- Lienzo ---------- */
+html,body{
+    height:100%
+}
+body{
+    margin:0;
+    color:var(--vk-text);
+    background:var(--vk-grad-1),var(--vk-grad-2),linear-gradient(180deg, var(--vk-bg), var(--vk-bg-2));
+    background-attachment:fixed;
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+}
+
+/* ---------- Header ---------- */
+header.border-bottom{
+    background:var(--vk-card);
+    border-color:var(--vk-line)!important;
+    box-shadow:var(--vk-shadow-sm)
+}
+header h1 .text-primary{
+    color:var(--vk-primary)!important
+}
+header .btn{
+    border-radius:12px
+}
+header .btn-outline-secondary:hover{
+    background:rgba(16,24,40,.05)
+}
+
+/* ---------- Contenido ---------- */
+main.container{
+    max-width:1200px
+}
+
+/* ---------- Cards / forms ---------- */
+.card{
+    border:1px solid var(--vk-line)!important;
+    border-radius:var(--vk-radius-lg);
+    box-shadow:var(--vk-shadow-sm)
+}
+.card .form-label{
+    font-weight:600
+}
+.card .form-control,.card .form-select{
+    border-radius:12px;
+    border:1px solid var(--vk-line);
+    transition:border-color .2s,box-shadow .2s,background-color .2s
+}
+@media (prefers-color-scheme: dark){
+    .card .form-control,.card .form-select{
+        background:#0e162b;
+        color:var(--vk-text)
+    }
+}
+.card .form-control:focus,.card .form-select:focus{
+    border-color:var(--vk-primary);
+    box-shadow:0 0 0 3px rgba(46,124,246,.18)
+}
+
+/* ---------- Títulos / botones ---------- */
+section .h4{
+    font-weight:800;
+    letter-spacing:.2px
+}
+section .btn-success{
+    border-radius:12px;
+    box-shadow:0 6px 16px rgba(34,197,94,.22)
+}
+.btn.btn-sm{
+    border-radius:10px
+}
+.btn-outline-primary{
+    border-color:var(--vk-primary);
+    color:var(--vk-primary)
+}
+.btn-outline-primary:hover{
+    background:rgba(46,124,246,.08);
+    border-color:var(--vk-primary-600);
+    color:var(--vk-primary-600)
+}
+.btn-outline-danger:hover{
+    background:rgba(239,68,68,.08)
+}
+.btn-primary{
+    --bs-btn-bg:var(--vk-primary);
+    --bs-btn-border-color:var(--vk-primary);
+    --bs-btn-hover-bg:var(--vk-primary-600);
+    --bs-btn-hover-border-color:var(--vk-primary-600);
+    --bs-btn-active-bg:var(--vk-primary-700);
+    --bs-btn-active-border-color:var(--vk-primary-700);
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(46,124,246,.25)
+}
+.btn-warning{
+    --bs-btn-bg:var(--vk-warning);
+    --bs-btn-border-color:var(--vk-warning);
+    border-radius:12px;
+    color:#1b2430;
+    box-shadow:0 6px 18px rgba(245,158,11,.25)
+}
+
+/* ---------- Tablas ---------- */
+.table{
+    margin-bottom:0
+}
+.table thead.table-light{
+    background:linear-gradient(0deg, rgba(46,124,246,.06), rgba(46,124,246,.06)), var(--vk-card)!important;
+    border-bottom:1px solid var(--vk-line)
+}
+.table thead th{
+    text-transform:uppercase;
+    font-size:.82rem;
+    letter-spacing:.03em;
+    color:var(--vk-muted)
+}
+.table tbody tr:hover{
+    background:rgba(46,124,246,.04)
+}
+.table .text-truncate{
+    max-width:360px
+}
+
+/* Badges */
+.badge{
+    border-radius:999px;
+    font-weight:700;
+    letter-spacing:.2px;
+    padding:.45rem .6rem
+}
+.text-bg-success{
+    background-color:var(--vk-success)!important
+}
+.text-bg-danger{
+    background-color:var(--vk-danger)!important
+}
+.text-bg-secondary{
+    background-color:#94a3b8!important
+}
+
+/* ---------- Alerts ---------- */
+.alert{
+    border:0;
+    border-radius:14px;
+    box-shadow:var(--vk-shadow-sm)
+}
+.alert-success{
+    background:linear-gradient(0deg, rgba(34,197,94,.1), rgba(34,197,94,.1)), #fff;
+    color:#166534
+}
+.alert-danger{
+    background:linear-gradient(0deg, rgba(239,68,68,.1), rgba(239,68,68,.1)), #fff;
+    color:#b91c1c
+}
+@media (prefers-color-scheme: dark){
+    .alert{
+        background:rgba(255,255,255,.03);
+        color:var(--vk-text);
+        border:1px solid var(--vk-line)
+    }
+}
+
+/* ---------- Tabla stacked móvil ---------- */
+@media (max-width:575.98px){
+    .table thead{
+        display:none
+    }
+    .table,.table tbody,.table tr,.table td{
+        display:block;
+        width:100%
+    }
+    .table tbody tr{
+        border:1px solid var(--vk-line);
+        border-radius:12px;
+        padding:.4rem .6rem;
+        margin-bottom:.6rem
+    }
+    .table td{
+        border:0!important;
+        padding:.35rem 0
+    }
+    .table td::before{
+        content:attr(data-label);
+        display:block;
+        font-size:.78rem;
+        color:var(--vk-muted);
+        text-transform:uppercase;
+        letter-spacing:.03em;
+        margin-bottom:.15rem
+    }
+}
+.table-responsive{
+    border-radius:12px;
+    border:1px solid var(--vk-line);
+    box-shadow:var(--vk-shadow-sm)
+}
+.card:hover{
+    transform:translateY(-1px);
+    transition:transform .18s ease
+}
+.h4 .bi, h1 .bi{
+    filter:drop-shadow(0 3px 8px rgba(46,124,246,.25))
+}
+
+/* ---------- Foco accesible (incluye :focus-visible) ---------- */
+a:focus,a:focus-visible,button:focus,button:focus-visible,.btn:focus,.btn:focus-visible,
+.form-control:focus,.form-control:focus-visible,.form-select:focus,.form-select:focus-visible{
+    outline:none!important;
+    box-shadow:0 0 0 3px rgba(46,124,246,.25)!important;
+    border-radius:10px
+}
+
+/* ===================================================
+   MODALES MEJORADOS (<dialog>)
+   =================================================== */
+
+/* 1) Caja del modal: CENTRADO + tamaño responsivo */
+dialog{
+    position:fixed;
+    inset:0;
+    margin:auto;              /* ⬅️ centra en toda la ventana */
+    border:0;
+    padding:0;
+    width:clamp(390px, 98vw, 960px);                   /* ⬅️ ancho responsivo */
+    max-height:min(92dvh, 980px);                      /* ⬅️ altura responsiva segura */
+    background:var(--vk-modal-bg);
+    border-radius:20px;
+    box-shadow:0 20px 50px rgba(2,6,23,.35);
+    overflow:hidden;
+    transform-origin:center;
+    opacity:0;
+    transform:translateY(6px) scale(.985);
+    transition:opacity .18s ease, transform .18s ease;
+    backdrop-filter:saturate(1.05);
+}
+dialog[open]{
+    opacity:1;
+    transform:translateY(0) scale(1)
+}
+dialog::backdrop{
+    background:var(--vk-modal-backdrop);
+    backdrop-filter:blur(2px)
+}
+
+/* 2) Layout interno: header (sticky) / body flex / footer (sticky) */
+dialog form{
+    display:flex;
+    flex-direction:column;
+    min-height:100%
+} /* ⬅️ ocupa todo el alto */
+dialog header{
+    background:var(--vk-modal-header-grad);
+    padding:14px 16px 10px;
+    position:sticky;
+    top:0;
+    z-index:2;
+    border-bottom:1px solid var(--vk-line);
+    backdrop-filter:blur(4px) saturate(1.1)
+}
+dialog header h3{
+    font-weight:800;
+    letter-spacing:.2px;
+    display:flex;
+    align-items:center;
+    gap:.5rem
+}
+dialog form > .px-3.py-3{
+    flex:1 1 auto;
+    min-height:0;                        /* ⬅️ el body crece/encoge */
+    overflow:auto;
+    padding-block:16px!important;
+    scrollbar-gutter:stable
+}
+dialog form > .px-3.py-3::-webkit-scrollbar{
+    height:12px;
+    width:12px
+}
+dialog form > .px-3.py-3::-webkit-scrollbar-thumb{
+    background:rgba(100,116,139,.35);
+    border-radius:999px;
+    border:3px solid transparent;
+    background-clip:padding-box
+}
+dialog footer{
+    position:sticky;
+    bottom:0;
+    z-index:2;
+    border-top:1px solid var(--vk-line)!important;
+    background:color-mix(in oklab, var(--vk-card), transparent 8%);
+    backdrop-filter:blur(6px) saturate(1.05);
+    padding:12px 16px
+}
+
+/* 3) Cerrar como icon-button (sin “chip” azul) */
+dialog [data-modal-close].btn.btn-light.btn-sm{
+    background:transparent;
+    border:1px solid var(--vk-line);
+    width:36px;
+    height:36px;
+    padding:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    box-shadow:none
+}
+dialog [data-modal-close].btn.btn-light.btn-sm:hover{
+    background:rgba(16,24,40,.06)
+}
+dialog [data-modal-close].btn.btn-light.btn-sm:focus,
+dialog [data-modal-close].btn.btn-light.btn-sm:focus-visible{
+    box-shadow:0 0 0 3px rgba(46,124,246,.20)!important
+}
+
+/* 4) Inputs y botones dentro del modal */
+dialog .form-label{
+    font-weight:700
+}
+dialog .form-control, dialog .form-select{
+    border-radius:12px;
+    border:1px solid var(--vk-line);
+    transition:border-color .18s, box-shadow .18s, background-color .18s
+}
+dialog .form-control:focus, dialog .form-select:focus{
+    border-color:var(--vk-primary);
+    box-shadow:0 0 0 3px rgba(46,124,246,.20)
+}
+dialog .btn{
+    border-radius:12px
+}
+dialog .btn-success{
+    box-shadow:0 8px 18px rgba(34,197,94,.22)
+}
+dialog .btn-primary{
+    background:var(--vk-primary);
+    border-color:var(--vk-primary);
+    box-shadow:0 8px 18px rgba(46,124,246,.22)
+}
+dialog .btn-danger{
+    box-shadow:0 8px 18px rgba(239,68,68,.22)
+}
+
+/* 5) Variantes tamaño por data-attr */
+dialog[data-size="lg"]{
+    width:clamp(360px, 96vw, 920px);
+    max-height:min(90dvh, 920px)
+}
+dialog[data-size="sm"]{
+    width:clamp(320px, 90vw, 520px);
+    max-height:min(86dvh, 740px)
+}
+
+/* 6) Estado ocupado (evita doble submit) */
+dialog[aria-busy="true"] .btn[type="submit"]{
+    pointer-events:none;
+    opacity:.6
+}
+
+/* 7) Hover del disparador */
+[data-modal-open].btn:hover{
+    transform:translateY(-1px);
+    transition:transform .15s ease
+}
+
+/* ---------- Modo móvil: bottom-sheet ---------- */
+@media (max-width:575.98px){
+    dialog{
+        width:100vw;
+        max-width:100vw;
+        margin:0;
+        border-radius:18px 18px 0 0;
+        transform-origin:bottom center;
+        height:92dvh;
+        max-height:92dvh;
+        display:grid
+    }
+    dialog[open]{
+        animation:vk-sheet-in .22s ease-out both
+    }
+    @keyframes vk-sheet-in{
+        from{
+            opacity:0;
+            transform:translateY(24px) scale(.98)
+        }
+        to{
+            opacity:1;
+            transform:translateY(0) scale(1)
+        }
+    }
+    dialog form > .px-3.py-3{
+        max-height:none;
+        min-height:0
+    }
+}
+
+dialog footer .btn + .btn {
+  margin-left: 0.75rem; /* ~12px */
+}
+
+/* ========================================= */
